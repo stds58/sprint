@@ -43,7 +43,7 @@ class PerevalAdded(models.Model):
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='users')
     coord = models.ForeignKey('Coord', on_delete=models.CASCADE, related_name='coord')
     level = models.ForeignKey('Level', on_delete=models.CASCADE, related_name='level')
-    spr_activities_types = models.IntegerField(choices=CHOICE_STATUS, default=1)
+    spr_activities_types = models.IntegerField(choices=CHOICE_ACTIVITIES, default=1)
 
 
 class Coord(models.Model):

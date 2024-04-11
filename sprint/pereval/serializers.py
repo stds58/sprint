@@ -1,5 +1,6 @@
 from .models import User, PerevalAdded, Coord, Level, PerevalImages
 from rest_framework import serializers
+from drf_writable_nested import WritableNestedModelSerializer
 
 
 class UsersSerializer(serializers.ModelSerializer):
@@ -21,22 +22,29 @@ class LevelSerializer(serializers.ModelSerializer):
 
 
 class PerevalImagesSerializer(serializers.ModelSerializer):
-
+    img = serializers.URLField()
     class Meta:
         model = PerevalImages
         fields = ['title', 'img']
 
 
-class PerSerializer(serializers.ModelSerializer):
+class PerSerializer(WritableNestedModelSerializer):
     class Meta:
         model = PerevalAdded
-        fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time']
+        fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time', 'images']
 
 
-class PerevalSerializer(serializers.Serializer):
+class PerevalSerializer(WritableNestedModelSerializer):
+    class Meta:
+        model = PerevalAdded
+        fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time', 'images', 'user', 'coord', 'level']
+
     user = UsersSerializer()
     coord = CoordSerializer()
     level = LevelSerializer()
-    images1 = PerevalImagesSerializer() #many=True
-    #images2 = PerevalImagesSerializer()
-    pereval = PerSerializer()
+    images = PerevalImagesSerializer(many=True)
+
+
+
+
+

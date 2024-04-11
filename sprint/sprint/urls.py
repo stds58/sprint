@@ -25,8 +25,8 @@ from pereval.views import *
 router = routers.DefaultRouter()
 router.register(r'users', UserViewset, basename='users')
 router.register(r'coord', CoordViewset, basename='coord')
-# router.register(r'level', LevelViewset, basename='level')
-#router.register(r'images', PerevalImageViewset, basename='images')
+router.register(r'level', LevelViewset, basename='level')
+router.register(r'images', PerevalImageViewset, basename='images')
 router.register(r'perevals', PerevalViewset, basename='perevals')
 
 urlpatterns = [
