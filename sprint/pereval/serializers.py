@@ -28,12 +28,6 @@ class PerevalImagesSerializer(serializers.ModelSerializer):
         fields = ['title', 'img']
 
 
-# class PerSerializer(WritableNestedModelSerializer):
-#     class Meta:
-#         model = PerevalAdded
-#         fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time', 'images']
-
-
 class PerevalSerializer(WritableNestedModelSerializer):
     add_time = serializers.DateTimeField(format="%d-%m-%Y %H:%M:%S", read_only=True)
     user = UsersSerializer()
@@ -45,6 +39,10 @@ class PerevalSerializer(WritableNestedModelSerializer):
         model = PerevalAdded
         depth = 1
         fields = ['id', 'beauty_title', 'title', 'other_title', 'connect', 'add_time', 'status', 'images', 'user', 'coord', 'level']
+
+    def update(self, instance, validated_data):
+        pereval = PerevalAdded.objects.filter(pk=instance.id)
+        return pereval
 
 
     def create(self, validated_data, **kwargs):
@@ -66,7 +64,9 @@ class PerevalSerializer(WritableNestedModelSerializer):
 
         return pereval
 
+
     def validate(self, data):
+        #print('PerevalSerializer',dir(PerevalSerializer))
         if self.instance is not None:
             instance_user = self.instance.user
             data_user = data.get('user')
