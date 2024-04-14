@@ -77,6 +77,7 @@ class PerevalViewset(viewsets.ModelViewSet):
                     'message': 'запись успешно изменена'
                 })
             else:
+                print('fffffffffffffff')
                 return Response({
                     'state': '0',
                     'message': serializer.errors

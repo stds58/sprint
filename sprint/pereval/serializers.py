@@ -40,9 +40,9 @@ class PerevalSerializer(WritableNestedModelSerializer):
         depth = 1
         fields = ['id', 'beauty_title', 'title', 'other_title', 'connect', 'add_time', 'status', 'images', 'user', 'coord', 'level']
 
-    def update(self, instance, validated_data):
-        pereval = PerevalAdded.objects.filter(pk=instance.id)
-        return pereval
+    # def update(self, instance, validated_data):
+    #     pereval = PerevalAdded.objects.filter(pk=instance.id)
+    #     return pereval
 
 
     def create(self, validated_data, **kwargs):
@@ -66,7 +66,6 @@ class PerevalSerializer(WritableNestedModelSerializer):
 
 
     def validate(self, data):
-        #print('PerevalSerializer',dir(PerevalSerializer))
         if self.instance is not None:
             instance_user = self.instance.user
             data_user = data.get('user')
