@@ -7,7 +7,7 @@ class User(models.Model):
     fam = models.CharField(max_length=255, default="")
     otc = models.CharField(max_length=255, default="")
     phone = models.CharField(max_length=255, default="")
-    email = models.EmailField(max_length=255, unique=True, default="") #, unique=True
+    email = models.EmailField(max_length=255, default="") #, unique=True
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -69,7 +69,7 @@ class PerevalImages(models.Model):
     perevaladded = models.ForeignKey(PerevalAdded, on_delete=models.CASCADE, related_name='images')
     title = models.CharField(max_length=255, default="")
     date_added = models.DateTimeField(auto_now_add=True)
-    img = models.ImageField(upload_to='images', blank=True, unique=True)
+    img = models.ImageField(upload_to='images', blank=True) #, unique=True
 
 
 
