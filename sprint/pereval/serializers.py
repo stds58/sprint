@@ -57,14 +57,14 @@ class PerevalSerializer(WritableNestedModelSerializer):
 
         coord = Coord.objects.create(**coord)
         level = Level.objects.create(**level)
-        perevaladded = PerevalAdded.objects.create(**validated_data, user=user, coord=coord, level=level, status='new')
+        pereval = PerevalAdded.objects.create(**validated_data, user=user, coord=coord, level=level, status='new')
 
         for image in images:
-            data = image.pop('data')
+            data = image.pop('img')
             title = image.pop('title')
-            PerevalImages.objects.create(data=data, perevaladded=perevaladded, title=title)
+            PerevalImages.objects.create(img=data, perevaladded=pereval, title=title)
 
-        return perevaladded
+        return pereval
 
     def validate(self, data):
         if self.instance is not None:
