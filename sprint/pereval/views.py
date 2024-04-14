@@ -95,7 +95,3 @@ class PerevalViewset(viewsets.ModelViewSet):
 
 
 
-    # def get_serializer_class(self):
-    #     if self.action == 'partial_update':
-    #         return PerevalSerializer
-    #     return super().get_serializer_class()
