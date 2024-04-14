@@ -28,10 +28,10 @@ class PerevalImagesSerializer(serializers.ModelSerializer):
         fields = ['title', 'img']
 
 
-class PerSerializer(WritableNestedModelSerializer):
-    class Meta:
-        model = PerevalAdded
-        fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time', 'images']
+# class PerSerializer(WritableNestedModelSerializer):
+#     class Meta:
+#         model = PerevalAdded
+#         fields = ['beauty_title', 'title', 'other_title', 'connect', 'add_time', 'images']
 
 
 class PerevalSerializer(WritableNestedModelSerializer):
@@ -52,7 +52,6 @@ class PerevalSerializer(WritableNestedModelSerializer):
         coord = validated_data.pop('coord')
         level = validated_data.pop('level')
         images = validated_data.pop('images')
-        print('user',user)
 
         user, created = User.objects.get_or_create(**user)
 

@@ -2,12 +2,15 @@ from rest_framework import viewsets
 from .serializers import *
 from rest_framework import status
 from rest_framework.response import Response
+import django_filters
 
 
 class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UsersSerializer
-#
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['fam', 'name', 'otc', 'email']
+
 
 class CoordViewset(viewsets.ModelViewSet):
     queryset = Coord.objects.all()
@@ -24,13 +27,15 @@ class PerevalImageViewset(viewsets.ModelViewSet):
     serializer_class = PerevalImagesSerializer
 
 
-class PerViewset(viewsets.ModelViewSet):
-    queryset = PerevalAdded.objects.all()
-    serializer_class = PerSerializer
+# class PerViewset(viewsets.ModelViewSet):
+#     queryset = PerevalAdded.objects.all()
+#     serializer_class = PerSerializer
 
 class PerevalViewset(viewsets.ModelViewSet):
     queryset = PerevalAdded.objects.all()
     serializer_class = PerevalSerializer
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
+    filterset_fields = ['beauty_title', 'title', 'add_time', 'user__email']
 
     def create(self, request, *args, **kwargs):
         if self.action == 'create':

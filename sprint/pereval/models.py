@@ -3,11 +3,11 @@ from django.db import models
 
 
 class User(models.Model):
-    name = models.CharField(max_length=255, default="")
-    fam = models.CharField(max_length=255, default="")
-    otc = models.CharField(max_length=255, default="")
-    phone = models.CharField(max_length=255, default="")
-    email = models.EmailField(max_length=255, default="") #, unique=True
+    name = models.CharField(max_length=255) #, default=""
+    fam = models.CharField(max_length=255)
+    otc = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+    email = models.EmailField(max_length=255) #, unique=True
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -34,10 +34,10 @@ class PerevalAdded(models.Model):
         (10, 'парус'),
         (11, 'верхом')
     )
-    beauty_title = models.CharField(max_length=255, default="")
-    title = models.CharField(max_length=255, default="")
-    other_title = models.CharField(max_length=255, default="")
-    connect = models.TextField(default="")
+    beauty_title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
+    other_title = models.CharField(max_length=255)
+    connect = models.TextField()
     add_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10, choices=CHOICE_STATUS, default="new")
     user = models.ForeignKey('User', on_delete=models.CASCADE, related_name='users')
@@ -47,8 +47,8 @@ class PerevalAdded(models.Model):
 
 
 class Coord(models.Model):
-    latitude = models.DecimalField(decimal_places=8, max_digits=10, default=1.2)
-    longitude = models.DecimalField(decimal_places=8, max_digits=10, default=1.2)
+    latitude = models.DecimalField(decimal_places=8, max_digits=10)
+    longitude = models.DecimalField(decimal_places=8, max_digits=10)
     height = models.IntegerField(default=0)
 
 
@@ -67,7 +67,7 @@ class Level(models.Model):
 
 class PerevalImages(models.Model):
     perevaladded = models.ForeignKey(PerevalAdded, on_delete=models.CASCADE, related_name='images')
-    title = models.CharField(max_length=255, default="")
+    title = models.CharField(max_length=255)
     date_added = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(upload_to='images', blank=True) #, unique=True
 
