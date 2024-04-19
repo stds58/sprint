@@ -40,9 +40,22 @@ class PerevalSerializer(WritableNestedModelSerializer):
         depth = 1
         fields = ['id', 'beauty_title', 'title', 'other_title', 'connect', 'add_time', 'status', 'images', 'user', 'coord', 'level']
 
-    # def update(self, instance, validated_data):
-    #     pereval = PerevalAdded.objects.filter(pk=instance.id)
-    #     return pereval
+    def update(self, instance, validated_data):
+        user = validated_data.pop('user')
+        coord = validated_data.pop('coord')
+        level = validated_data.pop('level')
+        images = validated_data.pop('images')
+
+        user = User.objects.update(**user)
+        coord = Coord.objects.update(**coord)
+        level = Level.objects.update(**level)
+
+        for image in images:
+            data = image.pop('img')
+            title = image.pop('title')
+            PerevalImages.objects.update(img=data, title=title)
+
+        return super().update(instance, validated_data)
 
 
     def create(self, validated_data, **kwargs):
