@@ -114,7 +114,7 @@ GET /Pereval/?user_id__email=<email>
 Документация swagger: http://127.0.0.1:8000/swagger/
 Документация redoc: http://127.0.0.1:8000/redoc/
 
-![db_shema схема бд](https://github.com/stds58/sprint.git/raw/sprint3/sprint/media/images/db_shema.png)
+![db_shema схема бд](https://github.com/stds58/sprint/blob/sprint3/sprint/media/images/db_shema.png)
 
 Дополнительно:
 
