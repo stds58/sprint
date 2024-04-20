@@ -6,7 +6,7 @@ from drf_writable_nested import WritableNestedModelSerializer
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['name', 'fam', 'otc', 'phone', 'email']
+        fields = ['email', 'fam', 'name', 'otc', 'phone']
 
 
 class CoordSerializer(serializers.ModelSerializer):
@@ -38,7 +38,7 @@ class PerevalSerializer(WritableNestedModelSerializer):
     class Meta:
         model = PerevalAdded
         depth = 1
-        fields = ['id', 'beauty_title', 'title', 'other_title', 'connect', 'add_time', 'status', 'images', 'user', 'coord', 'level']
+        fields = ['id', 'beauty_title', 'title', 'other_title', 'connect', 'add_time', 'status', 'user', 'coord', 'level', 'images']
 
     def update(self, instance, validated_data):
         user = validated_data.pop('user')
