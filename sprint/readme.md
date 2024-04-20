@@ -133,9 +133,9 @@ GET /Pereval/?user_id__email=<email>
 
 Проект опубликован на хостинге pythonanywhere.com
 
-API Pereval: https://olegafonick.pythonanywhere.com/api/Pereval/
-Документация swagger: https://olegafonick.pythonanywhere.com/swagger/
-Документация redoc: https://olegafonick.pythonanywhere.com/redoc/
+API Pereval: https://stds58.pythonanywhere.com/api/Pereval/
+Документация swagger: https://stds58.pythonanywhere.com/swagger/
+Документация redoc: https://stds58.pythonanywhere.com/redoc/
 
 к сожалению, так и не удалось установить, почему на хостинге pythonanywhere.com/api/Pereval/ 
 не получается создать/изменить поля decimal в формате Raw data(json). в формате HTML form получается.
