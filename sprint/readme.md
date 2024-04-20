@@ -143,4 +143,6 @@ API Pereval: https://olegafonick.pythonanywhere.com/api/Pereval/
 
 Отчет о покрытии тестами:
 
-2023-04-10_002254
+![тесты](https://github.com/stds58/sprint/blob/sprint3/sprint/media/images/coverage_report.png)
+
+

@@ -3,6 +3,7 @@ from .serializers import *
 from rest_framework import status
 from rest_framework.response import Response
 import django_filters
+from drf_yasg.utils import swagger_auto_schema
 
 
 class UserViewset(viewsets.ModelViewSet):
@@ -77,7 +78,6 @@ class PerevalViewset(viewsets.ModelViewSet):
                     'message': 'запись успешно изменена'
                 })
             else:
-                print('fffffffffffffff')
                 return Response({
                     'state': '0',
                     'message': serializer.errors
@@ -88,9 +88,11 @@ class PerevalViewset(viewsets.ModelViewSet):
                 'message': f"отклонено. причина: {pereval.get_status_display()}"
             })
 
+    @swagger_auto_schema(auto_schema=None)
     def update(self, request, *args, **kwargs):
         pass
 
+    @swagger_auto_schema(auto_schema=None)
     def destroy(self, request, *args, **kwargs):
         pass
 
