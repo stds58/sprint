@@ -137,9 +137,6 @@ API Pereval: https://stds58.pythonanywhere.com/api/Pereval/
 Документация swagger: https://stds58.pythonanywhere.com/swagger/
 Документация redoc: https://stds58.pythonanywhere.com/redoc/
 
-к сожалению, так и не удалось установить, почему на хостинге pythonanywhere.com/api/Pereval/ 
-не получается создать/изменить поля decimal в формате Raw data(json). в формате HTML form получается.
-на локальном компьютере получается провести такие операции и в Raw data и в HTML form.
 
 Отчет о покрытии тестами:
 
