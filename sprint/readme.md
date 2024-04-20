@@ -111,8 +111,8 @@ GET /Pereval/?user_id__email=<email>
 
 Документация сгенерирована с помощью пакета drf-yasg
 
-Документация swagger: http://127.0.0.1:8000/swagger/
-Документация redoc: http://127.0.0.1:8000/redoc/
+Документация swagger: http://stds58.pythonanywhere.com/swagger/
+Документация redoc: http://stds58.pythonanywhere.com/redoc/
 
 схема базы данных
 ![db_shema схема бд](https://github.com/stds58/sprint/blob/sprint3/sprint/media/images/db_shema.png)
