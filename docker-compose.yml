@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=default://postgres:postgres@db:5432/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
     networks:
       - default
 
