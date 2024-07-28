@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'sprint.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('FSTR_DB_NAME'),
         'USER': os.getenv('FSTR_DB_LOGIN'),
         'PASSWORD': os.getenv('FSTR_DB_PASS'),
