@@ -9,7 +9,7 @@ ENV PATH "$VIRTUAL_ENV/bin:$PATH"
 COPY .. /sprint
 RUN pip install --no-cache-dir -r /sprint/requirements.txt
 
-RUN python sprint/manage.py collectstatic --no-input
+#RUN python sprint/manage.py collectstatic --no-input
 RUN pip install gunicorn
 WORKDIR /sprint
 #CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
