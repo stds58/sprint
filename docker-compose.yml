@@ -7,9 +7,9 @@ services:
     command: bash -c "
       python manage.py makemigrations &&
       python manage.py migrate &&
-      python manage.py runserver 0.0.0.0:80 --reload"
+      gunicorn sprint.wsgi:application --bind 0.0.0.0:8000 --reload"
     ports:
-      - "80:80"
+      - "8000:8000"
     depends_on:
       - db
     environment:
