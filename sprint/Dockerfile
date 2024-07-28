@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r /sprint/requirements.txt
 WORKDIR /sprint
 #CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 
-EXPOSE 8000
+EXPOSE 80
 
 #FROM python:3.8
 #
