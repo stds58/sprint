@@ -8,10 +8,10 @@ ENV PATH "$VIRTUAL_ENV/bin:$PATH"
 # Команды Python будут выполнены в виртуальной среде
 COPY .. /sprint
 RUN pip install --no-cache-dir -r /sprint/requirements.txt
-#RUN pip install gunicorn
+RUN pip install gunicorn
 WORKDIR /sprint
 #CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
-#CMD ["gunicorn", "sprint.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["gunicorn", "sprint.wsgi:application", "--bind", "0.0.0.0:8000"]
 
 EXPOSE 8000
 
