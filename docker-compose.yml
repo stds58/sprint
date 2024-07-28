@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
     volumes:
-      - static_files:/static_files
+      - static_files:./sprint/static_files
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
     networks:
