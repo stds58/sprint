@@ -7,7 +7,7 @@ ENV PATH "$VIRTUAL_ENV/bin:$PATH"
 
 # Команды Python будут выполнены в виртуальной среде
 COPY .. /sprint
-RUN python manage.py collectstatic
+RUN python sprint.manage.py collectstatic
 RUN pip install --no-cache-dir -r /sprint/requirements.txt
 RUN pip install gunicorn
 WORKDIR /sprint
