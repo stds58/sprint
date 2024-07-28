@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - DATABASE_URL=default://postgres:postgres@db:5432/postgres
     networks:
       - default
 
@@ -24,7 +24,7 @@ services:
     image: postgres:latest
     restart: always
     # set shared memory limit when using docker-compose
-    shm_size: 128mb
+    #shm_size: 128mb
     # or set shared memory limit when deploy via swarm stack
     #volumes:
     #  - type: tmpfs

@@ -97,14 +97,14 @@ DATABASES = {
 "default": dict(
         config("DATABASE_URL", cast=db_url),
     )
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': os.getenv('FSTR_DB_NAME'),
-    #     'USER': os.getenv('FSTR_DB_LOGIN'),
-    #     'PASSWORD': os.getenv('FSTR_DB_PASS'),
-    #     'HOST': os.getenv('DATABASE_URL'),
-    #     'PORT': os.getenv('FSTR_DB_PORT'),
-    # },
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('FSTR_DB_NAME'),
+#         'USER': os.getenv('FSTR_DB_LOGIN'),
+#         'PASSWORD': os.getenv('FSTR_DB_PASS'),
+#         'HOST': os.getenv('DATABASE_URL'),
+#         'PORT': os.getenv('FSTR_DB_PORT'),
+#     },
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': 'sprint/db.sqlite3',
