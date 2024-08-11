@@ -1,9 +1,9 @@
 FROM python:3.8
 
 # Настроить и активировать виртуальную среду
-ENV VIRTUAL_ENV="/venv"
+ENV VIRTUAL_ENV "/venv"
 RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+ENV PATH "$VIRTUAL_ENV/bin:$PATH"
 
 # Команды Python будут выполнены в виртуальной среде
 COPY .. /sprint
