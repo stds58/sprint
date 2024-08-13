@@ -88,16 +88,16 @@ services:
       - mynetwork
 
 #sa у mssql должен быть сложный иначе пользователь не создастся
-  testmssql2:
-    container_name: testmssql2
-    image: my/testmssq/image/name #mcr.microsoft.com/mssql/server:2017
-    ports:
-      - 6003:1433
-    volumes:
-      - mssqldata:/var/opt/mssql
-    #build:
-      #context: .
-      #dockerfile: sprint/mssqlconf/Dockerfile
+#  testmssql2:
+#    container_name: testmssql2
+#    image: my/testmssq/image/name #mcr.microsoft.com/mssql/server:2017
+#    ports:
+#      - 6003:1433
+#    volumes:
+#      - mssqldata:/var/opt/mssql
+#    build:
+#      context: .
+#      dockerfile: sprint/mssqlconf/Dockerfile
  ### test db ####
 
 volumes:
