@@ -25,19 +25,21 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2z6%z=g_1b-slkjfvgc-zq&=c5(ip854d7-%)0f29vj18_54p8'
+SECRET_KEY = os.environ.get('SECRET_KEY') #'django-insecure-2z6%z=g_1b-slkjfvgc-zq&=c5(ip854d7-%)0f29vj18_54p8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 #DEBUG = config("DEBUG", default=False, cast=bool)
 #SECRET_KEY = config("SECRET_KEY", default="")
 
 ALLOWED_HOSTS = [
-    '0.0.0.0',
-    '127.0.0.1',
-    '188.225.27.90',
-    'localhost',
-    '147.45.163.117',
+    '*',
+    # '0.0.0.0',
+    # '127.0.0.1',
+    # '188.225.27.90',
+    # 'localhost',
+    # '147.45.163.117',
 ]
 
 
@@ -61,14 +63,16 @@ SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
+]
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'sprint.urls'
 
 TEMPLATES = [
@@ -95,17 +99,17 @@ WSGI_APPLICATION = 'sprint.wsgi.application'
 
 
 DATABASES = {
-"default": dict(
-        config("DATABASE_URL", cast=db_url),
-    )
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('FSTR_DB_NAME'),
-#         'USER': os.getenv('FSTR_DB_LOGIN'),
-#         'PASSWORD': os.getenv('FSTR_DB_PASS'),
-#         'HOST': os.getenv('DATABASE_URL'),
-#         'PORT': os.getenv('FSTR_DB_PORT'),
-#     },
+# "default": dict(
+#         config("DATABASE_URL", cast=db_url),
+#     )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('FSTR_DB_NAME', 'postgres'),
+        'USER': os.getenv('FSTR_DB_LOGIN', 'postgres'),
+        'PASSWORD': os.getenv('FSTR_DB_PASS', 'postgres'),
+        'HOST': os.getenv('FSTR_DB_HOST', 'db'),
+        'PORT': os.getenv('FSTR_DB_PORT', 5433),
+    },
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': 'sprint/db.sqlite3',
@@ -144,12 +148,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-
+#SITE_URL = 'http://127.0.0.1:8000'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

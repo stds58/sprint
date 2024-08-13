@@ -1,5 +1,5 @@
 # Use postgres/example user/password credentials
-version: '3.9'
+#version: '3.9'
 
 services:
   sprint:
@@ -10,48 +10,107 @@ services:
       python manage.py collectstatic --no-input &&
       DJANGO_SUPERUSER_PASSWORD=111 python manage.py createsuperuser --username=admin --email=admin@example.com --noinput &&
       gunicorn sprint.wsgi:application --bind 0.0.0.0:8000 --reload"
+    volumes:
+      - ./sprint:/sprint
     ports:
       - "8000:8000"
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@db:5433/postgres
     networks:
-      - default
-
+      - mynetwork
 
   db:
     image: postgres:latest
     restart: always
-    # set shared memory limit when using docker-compose
-    #shm_size: 128mb
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
         - db:/var/lib/postgresql/data
     ports:
-        - "5432:5432"
+        - "5433:5432"
     networks:
-      - default
+      - mynetwork
 #  adminer:
 #    image: adminer
 #    restart: always
 #    ports:
 #      - 8080:8080
 
+### test db ####
+  testmariadb:
+    container_name: testmariadb
+    image: mariadb:latest
+    ports:
+      - 6000:3306
+    environment:
+      MARIADB_USER: admin
+      MARIADB_PASSWORD: admin
+      MARIADB_ROOT_PASSWORD: admin
+      MARIADB_DATABASE: bdmaria
+    restart: always
+    networks:
+      - mynetwork
+
+  testmysql:
+    container_name: testmysql
+    image: mysql:latest
+    restart: always
+    ports:
+      - 6001:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: bdmysql
+    volumes:
+      - /var/lib/mysql/
+    networks:
+      - mynetwork
+
+  testpostgres:
+    container_name: testpostgres
+    image: postgres:13
+    ports:
+      - 6002:5432
+    shm_size: 128mb
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - testpgdata:/var/lib/postgresql/data/testpgdata
+    restart: always
+    networks:
+      - mynetwork
+
+#sa у mssql должен быть сложный иначе пользователь не создастся
+  testmssql:
+    container_name: testmssql
+    image: my/testmssq/image/name #mcr.microsoft.com/mssql/server:2017
+    ports:
+      - 6003:1433
+    volumes:
+      - mssqldata:/var/opt/mssql
+    build:
+      context: .
+      dockerfile: sprint/mssqlconf/Dockerfile
+ ### test db ####
+
 volumes:
     db:
       driver: local
+    mssqldata:
+    testpgdata:
+      driver: local
 
 networks:
-  default:
-    driver: bridge
-    driver_opts:
-      com.docker.network.driver.mtu: 1450
+  mynetwork:
+    external: true
+
+
+
+
