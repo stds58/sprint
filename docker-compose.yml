@@ -8,7 +8,7 @@ services:
       python manage.py makemigrations &&
       python manage.py migrate &&
       python manage.py collectstatic --no-input &&
-      DJANGO_SUPERUSER_PASSWORD=111 python manage.py createsuperuser --username=admin --email=admin@example.com --noinput &&
+      DJANGO_SUPERUSER_PASSWORD=111 python manage.py createsuperuser --username=admin2 --email=admin2@example.com --noinput &&
       gunicorn sprint.wsgi:application --bind 0.0.0.0:8000 --reload"
     volumes:
       - ./sprint:/sprint
@@ -22,6 +22,7 @@ services:
       - mynetwork
 
   db:
+    container_name: db2
     image: postgres:latest
     restart: always
     environment:
@@ -41,7 +42,7 @@ services:
 
 ### test db ####
   testmariadb:
-    container_name: testmariadb
+    container_name: testmariadb2
     image: mariadb:latest
     ports:
       - 6000:3306
@@ -55,7 +56,7 @@ services:
       - mynetwork
 
   testmysql:
-    container_name: testmysql
+    container_name: testmysql2
     image: mysql:latest
     restart: always
     ports:
@@ -71,7 +72,7 @@ services:
       - mynetwork
 
   testpostgres:
-    container_name: testpostgres
+    container_name: testpostgres2
     image: postgres:13
     ports:
       - 6002:5432
@@ -89,7 +90,7 @@ services:
 
 #sa у mssql должен быть сложный иначе пользователь не создастся
   testmssql:
-    container_name: testmssql
+    container_name: testmssql2
     image: my/testmssq/image/name #mcr.microsoft.com/mssql/server:2017
     ports:
       - 6003:1433
