@@ -8,20 +8,19 @@ services:
       python manage.py makemigrations &&
       python manage.py migrate &&
       python manage.py collectstatic --no-input &&
-      DJANGO_SUPERUSER_PASSWORD=111 python manage.py createsuperuser --username=admin2 --email=admin2@example.com --noinput &&
       gunicorn sprint.wsgi:application --bind 0.0.0.0:8000 --reload"
     volumes:
       - ./sprint:/sprint
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      - db2
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5433/postgres
+      - DATABASE_URL=postgresql://postgres:postgres@db2:5433/postgres
     networks:
       - mynetwork
 
-  db:
+  db2:
     container_name: db2
     image: postgres:latest
     restart: always
@@ -29,7 +28,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-        - db:/var/lib/postgresql/data
+        - db2:/var/lib/postgresql/data
     ports:
         - "5433:5432"
     networks:
@@ -41,7 +40,7 @@ services:
 #      - 8080:8080
 
 ### test db ####
-  testmariadb:
+  testmariadb2:
     container_name: testmariadb2
     image: mariadb:latest
     ports:
@@ -55,7 +54,7 @@ services:
     networks:
       - mynetwork
 
-  testmysql:
+  testmysql2:
     container_name: testmysql2
     image: mysql:latest
     restart: always
@@ -71,7 +70,7 @@ services:
     networks:
       - mynetwork
 
-  testpostgres:
+  testpostgres2:
     container_name: testpostgres2
     image: postgres:13
     ports:
@@ -89,20 +88,20 @@ services:
       - mynetwork
 
 #sa у mssql должен быть сложный иначе пользователь не создастся
-  testmssql:
+  testmssql2:
     container_name: testmssql2
     image: my/testmssq/image/name #mcr.microsoft.com/mssql/server:2017
     ports:
       - 6003:1433
     volumes:
       - mssqldata:/var/opt/mssql
-    build:
-      context: .
-      dockerfile: sprint/mssqlconf/Dockerfile
+    #build:
+      #context: .
+      #dockerfile: sprint/mssqlconf/Dockerfile
  ### test db ####
 
 volumes:
-    db:
+    db2:
       driver: local
     mssqldata:
     testpgdata:

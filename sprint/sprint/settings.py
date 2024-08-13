@@ -107,7 +107,7 @@ DATABASES = {
         'NAME': os.getenv('FSTR_DB_NAME', 'postgres'),
         'USER': os.getenv('FSTR_DB_LOGIN', 'postgres'),
         'PASSWORD': os.getenv('FSTR_DB_PASS', 'postgres'),
-        'HOST': os.getenv('FSTR_DB_HOST', 'db'),
+        'HOST': os.getenv('FSTR_DB_HOST', 'db2'),
         'PORT': os.getenv('FSTR_DB_PORT', 5433),
     },
     # 'default': {
